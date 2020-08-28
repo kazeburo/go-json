@@ -90,9 +90,13 @@ func (e *Encoder) Encode(v interface{}) error {
 	if err := e.encode(v); err != nil {
 		return err
 	}
+	if e.buf[len(e.buf)-1] != '\n' {
+		e.buf = append(e.buf, '\n')
+	}
 	if _, err := e.w.Write(e.buf); err != nil {
 		return err
 	}
+	e.buf = e.buf[:0]
 	return nil
 }
 
