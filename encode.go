@@ -135,6 +135,11 @@ func (e *Encoder) release() {
 	encPool.Put(e)
 }
 
+// Release public method for release
+func (e *Encoder) Release() {
+	e.release()
+}
+
 func (e *Encoder) reset() {
 	e.buf = e.buf[:0]
 	e.enabledHTMLEscape = true
