@@ -110,6 +110,19 @@ func (e *Encoder) EncodeWithOption(v interface{}, opts ...EncodeOption) error {
 	return nil
 }
 
+func (e *Encoder) EncodeWithOptionRawBuf(v interface{}, opts ...EncodeOption) ([]byte, error) {
+	for _, opt := range opts {
+		if err := opt(e); err != nil {
+			return []byte(""), err
+		}
+	}
+	if err := e.encode(v); err != nil {
+		return []byte(""), err
+	}
+	e.buf = append(e.buf, '\n')
+	return e.buf, nil
+}
+
 // SetEscapeHTML specifies whether problematic HTML characters should be escaped inside JSON quoted strings.
 // The default behavior is to escape &, <, and > to \u0026, \u003c, and \u003e to avoid certain safety problems that can arise when embedding JSON in HTML.
 //
