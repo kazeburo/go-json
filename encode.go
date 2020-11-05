@@ -30,7 +30,7 @@ type compiledCode struct {
 }
 
 const (
-	bufSize = 1024
+	bufSize = 16 * 1024
 )
 
 type opcodeMap struct {
