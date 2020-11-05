@@ -142,9 +142,9 @@ func (e *Encoder) Release() {
 
 func (e *Encoder) reset() {
 	e.buf = e.buf[:0]
-	e.enabledHTMLEscape = true
+	e.enabledHTMLEscape = false
 	e.enabledIndent = false
-	e.unorderedMap = false
+	e.unorderedMap = true
 }
 
 func (e *Encoder) encodeForMarshal(v interface{}) ([]byte, error) {
